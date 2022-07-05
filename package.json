@@ -74,7 +74,8 @@
     "build:ghpages": "env-cmd -f .env.ghpages npm run build",
     "serve": "serve -s build -l 4000",
     "predeploy": "npm run build:ghpages",
-    "deploy": "gh-pages -b gh-pages -d build"
+    "deploy": "gh-pages -b gh-pages -d build",
+		"prettier:fix": "prettier --config .prettierrc --write './src/**/*.{js,sjs,wxs,css,wxss,acss,wxml,axml,less,scss,json}'"
   },
   "eslintConfig": {
     "extends": [
@@ -148,6 +149,21 @@
   "babel": {
     "presets": [
       "react-app"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,yml,yaml,css,scss,ts,tsx,md}": [
+      "prettier --write"
     ]
   }
 }
